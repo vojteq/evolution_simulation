@@ -1,0 +1,12 @@
+{ 
+    "width": 50,
+    "height": 50,
+    "initialEnergy": 20,
+    "moveEnergy": 2,
+    "plantEnergy": 20,
+    "reproduceEnergy": 10,
+    "pairsOfPlantsSpawnedPerYear": 6,
+    "sleep": 100,
+    "numberOfAnimals": 50,
+    "jungleRatio": 0.5
+}
