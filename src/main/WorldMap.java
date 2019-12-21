@@ -6,8 +6,7 @@ import java.text.AttributedCharacterIterator;
 import java.util.*;
 
 public class WorldMap {
-    protected Random random = new Random();      //zeby nie tworzyc co chwile
-//    protected Position leftLowerCornerOfJungle;
+    protected Random random = new Random();
     protected final Position upperRight;
     protected final int startOfJungleX;
     protected final int startOfJungleY;
@@ -56,7 +55,7 @@ public class WorldMap {
     private Animal tryToPlaceChild(Animal parent1, Animal parent2) {
         if (parent1.getEnergy() > reproduceEnergy && parent2.getEnergy() > reproduceEnergy) {
             Position position = findPlaceForBabyAnimal(parent1);
-            if (position != null) {         //null -> nie ma miejsca dookola rodzicow wiec nie wstawiamy
+            if (position != null) {         //null -> theres no place around parents so they wont reproduce
                 return new Animal(parent1, parent2, position);
             }
         }
@@ -96,12 +95,12 @@ public class WorldMap {
                 return position;
             numberOfAttempts++;
         }
-        for (i = 0; i < 8; i++){     //bo teoretycznie caly czas moze losowac zajete nawet jak sa jakies wolne
+        for (i = 0; i < 8; i++){
             position = parent1.getPosition().addWithModulo(nearby[i], heightOfMap, widthOfMap);
             if (!isOccupied(position))
                 return position;
         }
-        return null;        //jesli wszystkie pola dookola sa zajete to sie nie rozmnoza
+        return null;        //parents wont reproduce
     }
 
     private void removeDeadAnimals() {
@@ -143,7 +142,7 @@ public class WorldMap {
             y = Math.abs(random.nextInt()) % heightOfJungle + startOfJungleY;
             position = new Position(x,y);
             counter++;
-        } while (isOccupied(position) && counter < 20);        //zeby nie bylo nieskonczonej petli
+        } while (isOccupied(position) && counter < 20);
         if (counter < 20)
             plantHashMap.put(position, new Plant(position));
     }
@@ -166,7 +165,7 @@ public class WorldMap {
     protected ArrayList<Animal> getStrongest(ArrayList<Animal> animals) {
         if (animals.size() == 1)
             return animals;
-        int maxEnergy = -moveEnergy;            //zakladam ze jak mial jakas energie przed ruchem to mogl dojsc
+        int maxEnergy = -moveEnergy;            //can move if have any energy, its last chance
         for (Animal a : animals)
             if (a.getEnergy() > maxEnergy)
                 maxEnergy = a.getEnergy();
@@ -439,10 +438,10 @@ public class WorldMap {
             year++;
             calculateAvgEnergy();
             visualizationPanel.repaint();
-//                System.out.println(this.toString());
+//                System.out.println(this.toString());                     // uncomment to see as strings in console
             Thread.sleep(sleep);
         }
-//        if (animalList.size() == 1)
+//        if (animalList.size() == 1)                                       //same
 //            System.out.println("year " + year + ", only one animal alive");
 //        else
 //            System.out.println("year " + year + ", all animals are dead");

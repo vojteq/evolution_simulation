@@ -25,8 +25,8 @@ public class Animal {
     public Animal(Animal parent1, Animal parent2, Position position){
         this.worldMap = parent1.worldMap;
         this.energy = parent1.energy / 4 + parent2.energy / 4;
-        parent1.energy = parent1.energy - parent1.energy / 4;       //zeby nie gubic przy dzieleniu calkowitym
-        parent2.energy = parent2.energy - parent2.energy / 4;       //zeby nie gubic przy dzieleniu calkowitym
+        parent1.energy = parent1.energy - parent1.energy / 4;
+        parent2.energy = parent2.energy - parent2.energy / 4;
         this.genome = takeGenesFromParents(parent1, parent2);
         this.orientation = Orientation.NORTH.turn(genome[Math.abs(worldMap.random.nextInt()) % sizeOfGenome]);
         this.position = position;
@@ -44,13 +44,13 @@ public class Animal {
     }
 
     private int[] takeGenesFromParents(Animal parent1, Animal parent2) {
-        int first = Math.abs(worldMap.random.nextInt()) % (sizeOfGenome - 2) + 1;          //zeby mozliwe indeksy byly od 1 do 30
+        int first = Math.abs(worldMap.random.nextInt()) % (sizeOfGenome - 2) + 1;          //indexes in range 1..30
         int second;
         do {
             second = Math.abs(worldMap.random.nextInt()) % (sizeOfGenome - 2) + 1;
         } while(first == second);
 
-        if (first > second){        //swap zeby potem ladnie podzielic tablice wejsciowe
+        if (first > second) {
             int tmp = first;
             first = second;
             second = tmp;
@@ -89,7 +89,7 @@ public class Animal {
         return j == 7;
     }
 
-    private void tryToFix(int[] genesArray){
+    private void tryToFix(int[] genesArray) {           //to make all moves possible
         boolean[] moves = new boolean[8];
         for (int i = 0; i < moves.length; i++) {
             moves[i] = false;
@@ -112,7 +112,7 @@ public class Animal {
         orientation = orientation.turn(genome[Math.abs(worldMap.random.nextInt()) % sizeOfGenome]);
     }
 
-    public void eat(int energy){
+    protected void eat(int energy){
         this.energy += energy;
     }
 

@@ -25,7 +25,7 @@ public enum Orientation {
             case NORTHWEST:
                 return "NW";
         }
-        return null;        //nieosiagalne
+        return null;        //unreachable
     }
 
     private int orientationToInt() {
@@ -47,7 +47,7 @@ public enum Orientation {
             case NORTHWEST:
                 return 7;
         }
-        return Integer.parseInt(null);      //nieosiagalne
+        return Integer.parseInt(null);      //unreachable
     }
 
     public Orientation intToOrierntation(int number){
@@ -69,7 +69,7 @@ public enum Orientation {
             case 7:
                 return NORTHWEST;
         }
-        return null;            //nieosiagalne
+        return null;            //unreachable
     }
 
     public Position toPosition(){
@@ -91,6 +91,6 @@ public enum Orientation {
             case NORTHWEST:
                 return new Position(-1,1);
         }
-        return null;        //nieosiagalne
+        return null;        //unreachable
     }
 }
